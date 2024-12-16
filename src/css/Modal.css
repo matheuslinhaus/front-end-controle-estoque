@@ -1,0 +1,248 @@
+/* Estilos do Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  backdrop-filter: blur(5px); /* Efeito de desfoque para foco no modal */
+}
+
+.modal-delete {
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f8f9fa
+  ); /* Gradiente sutil para o fundo */
+  padding: 35px 40px; /* Mais espaçamento */
+  border-radius: 12px; /* Bordas arredondadas */
+  width: 90%;
+  max-width: 800px; /* Aumento da largura */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+  overflow-y: auto;
+  max-height: 90%; /* Garantir responsividade em telas menores */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Animação ao abrir/fechar */
+}
+
+/*
+Modal do formulario de edição
+*/
+.modal {
+  position: linear-gradient; /* Modal fixo em relação à tela */
+  margin-top: 5px;
+  left: 50%; /* Centraliza horizontalmente */
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f8f9fa
+  ); /* Gradiente sutil para o fundo */
+  padding: 35px 40px; /* Mais espaçamento */
+  border-radius: 12px; /* Bordas arredondadas */
+  width: 80%;
+  max-width: 650px; /* Aumento da largura */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+  overflow-y: auto;
+  max-height: 80%; /* Garantir responsividade em telas menores */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Animação ao abrir/fechar */
+}
+
+/* Estilo do cabeçalho do modal */
+.modal h2 {
+  margin-bottom: 20px;
+  font-size: 24px; /* Tamanho maior */
+  font-weight: bold;
+  text-align: center;
+  color: #333333; /* Cor mais suave */
+  border-bottom: 2px solid #e0e0e0; /* Linha decorativa */
+  padding-bottom: 10px;
+}
+
+/* Formulário dentro do modal */
+.modal form {
+  display: grid;
+  grid-template-columns: repeat(
+    1fr,
+    2fr
+  ); /* Duas colunas para layout mais organizado */
+  gap: 5px; /* Menor espaço entre os campos */
+}
+
+/* Estilo do label */
+.modal label {
+  font-size: 16px; /* Tamanho maior */
+  font-weight: bold;
+  color: #555555;
+  margin-bottom: 5px; /* Espaço abaixo do label */
+  display: block;
+}
+
+/* Estilo dos campos de input e textarea */
+.modal input,
+.modal textarea {
+  width: 100%;
+  padding: 12px 10px; /* Menor espaçamento dentro dos campos */
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+  margin-left: auto;
+  margin-bottom: 8px; /* Menor margem inferior entre os campos */
+}
+
+/* Estilo único para o campo de descrição */
+#fullDescription {
+  width: 100%;
+  min-height: 20px; /* Altura mínima */
+  max-height: 100px; /* Altura máxima */
+  padding: 12px 10px; /* Menor espaçamento dentro dos campos */
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+  margin-left: auto;
+  margin-bottom: 8px; /* Menor margem inferior entre os campos */
+}
+
+/* Estilo quando o campo é focado */
+#fullDescription:focus {
+  border-color: #3498db; /* Azul no foco */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Brilho ao foco */
+  outline: none;
+}
+
+.modal input:focus,
+.modal textarea:focus {
+  border-color: #3498db; /* Azul no foco */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Brilho ao foco */
+  outline: none;
+}
+
+/* Campo de descrição (textarea) ocupa apenas a primeira coluna */
+.modal textarea {
+  grid-column: span 0; /* O campo ocupa apenas a primeira coluna */
+  resize: vertical; /* Permitido redimensionar verticalmente */
+  min-height: 150px; /* Altura mínima maior */
+}
+
+/* Estilo do checkbox */
+.modal input[type="checkbox"] {
+  accent-color: #3498db; /* Cor do checkbox */
+  width: 22px; /* Aumenta o tamanho do checkbox */
+  height: 22px; /* Aumenta o tamanho do checkbox */
+  margin: 6px; /* Remove qualquer margem */
+  padding: 0; /* Remove qualquer preenchimento */
+  display: inline-block; /* Garante que o checkbox fique no mesmo alinhamento */
+  vertical-align: middle; /* Alinha o checkbox verticalmente */
+}
+
+/* Estilo quando o checkbox estiver em foco */
+.modal input[type="checkbox"]:focus {
+  outline: 2px solid rgba(52, 152, 219, 0.5); /* Cor do foco */
+}
+
+/* Botões dentro do modal */
+.modal-actions {
+  display: flex;
+  justify-content: center; /* Centraliza os botões */
+  gap: 20px; /* Espaço maior entre os botões */
+  margin-top: 30px;
+}
+
+/* Botões de ação (Salvar e Cancelar) */
+.submit-btn,
+.cancel-btn {
+  padding: 14px 30px; /* Botões maiores */
+  cursor: pointer;
+  border: none;
+  border-radius: 25px; /* Formato arredondado */
+  font-weight: bold;
+  font-size: 18px; /* Tamanho maior */
+  text-transform: uppercase;
+  transition: all 0.3s ease; /* Transições suaves */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  display: inline-block;
+  width: 45%; /* Tamanho consistente */
+}
+
+/* Estilo específico para o botão de enviar */
+.submit-btn {
+  background: linear-gradient(90deg, #34c759, #28a745); /* Gradiente verde */
+  color: white;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #28a745, #218838);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo específico para o botão de cancelar */
+.cancel-btn {
+  background: linear-gradient(90deg, #ff3b30, #c0392b); /* Gradiente vermelho */
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(90deg, #c0392b, #a93226);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.cancel-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão de fechar no modal */
+.close-btn {
+  position: absolute; /* Posicionamento relativo ao modal */
+  top: 15px; /* Distância do topo */
+  right: 15px; /* Distância da direita */
+  background: none; /* Sem fundo */
+  border: none; /* Sem borda */
+  font-size: 28px; /* Tamanho do "X" */
+  font-weight: bold;
+  color: #ccc; /* Cor do "X" */
+  cursor: pointer; /* Cursor de ponteiro */
+  transition: color 0.3s ease; /* Transição suave ao hover */
+}
+
+.close-btn:hover {
+  color: #e74c3c; /* Cor ao passar o mouse */
+}
+
+.close-btn:focus {
+  outline: none; /* Remove o contorno ao focar */
+}
+/* Estilo para o asterisco vermelho */
+.required {
+  color: red; /* Cor vermelha para o asterisco */
+  font-weight: bold; /* Deixa o asterisco em negrito */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modal form {
+    grid-template-columns: 1fr; /* Uma coluna em dispositivos menores */
+  }
+
+  .submit-btn,
+  .cancel-btn {
+    width: 100%; /* Botões ocupam a largura total em telas menores */
+  }
+}

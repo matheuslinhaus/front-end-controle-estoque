@@ -1,0 +1,139 @@
+.create-btn {
+    float: right;
+    padding: 12px 20px; /* Aumenta o tamanho para ser mais confortável */
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(
+      145deg,
+      #42db34,
+      #34c759
+    ); /* Gradiente suave de verde */
+    color: white;
+    border-radius: 50px; /* Bordas bem arredondadas para um look mais moderno */
+    display: flex;
+    align-items: center;
+    font-size: 16px; /* Tamanho de fonte mais legível */
+    font-weight: 600; /* Texto em negrito para mais destaque */
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .create-btn:hover {
+    background: linear-gradient(
+      145deg,
+      #068110,
+      #34c759
+    ); /* Efeito de hover com gradiente mais escuro */
+    transform: translateY(-3px); /* Leve elevação ao passar o mouse */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil ao passar o mouse */
+  }
+  
+  .create-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5); /* Melhor acessibilidade para foco */
+  }
+  
+  .create-btn img {
+    margin-right: 10px; /* Mais espaço entre o ícone e o texto */
+    width: 20px; /* Ícone maior para mais destaque */
+    height: 20px;
+    transition: transform 0.3s ease; /* Suaviza a animação do ícone */
+  }
+  
+  .create-btn:hover img {
+    transform: translateX(5px); /* Leve movimento no ícone ao passar o mouse */
+  }
+  
+  .create-btn:active {
+    transform: translateY(0); /* Evita que o botão suba durante o clique */
+    box-shadow: none; /* Remove a sombra durante o clique */
+  }
+  
+  /* Tabela */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  /* Cabeçalho */
+  th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Linhas Alternadas (Pares e Ímpares) */
+  tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Fundo branco suave para as linhas ímpares */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #eaf5ff; /* Azul claro para as linhas pares */
+  }
+  
+  tr:hover {
+    background-color: #d0e7f9; /* Azul claro mais escuro no hover */
+  }
+  
+  /* Efeito de destaque nas linhas */
+  .highlight-row {
+    background-color: #eaf5ff; /* Azul claro */
+  }
+  
+  /* Botões de ação */
+  button {
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px); /* Feedback visual ao passar o mouse */
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5); /* Melhor acessibilidade para foco */
+  }
+  
+  button img {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Estilo para o botão de deletar */
+  .delete-btn {
+    background-color: #e74c3c;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Alinhamento das ações */
+  .actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
