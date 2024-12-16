@@ -28,7 +28,7 @@
   
   h1 {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: #e7e7e7;
   }
   
   p {
