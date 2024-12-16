@@ -1,0 +1,152 @@
+/* Container principal que engloba todos os componentes */
+#layout {
+    display: initial;
+    height: 100vh;
+    flex-direction: row;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Estilos para o conteúdo principal (main) */
+main {
+    margin-top: 50px; /* Espaço para o header horizontal */
+    padding: 260px;
+    flex-grow: 1;
+    margin-left: 250px; /* Reserva espaço para o sidebar */
+    transition: margin-left 0.3s ease;
+}
+
+/* Ajuste para quando o sidebar estiver colapsado */
+aside.sidebar-collapsed+main {
+    margin-left: 75px;
+}
+
+/* Estilos gerais do sidebar */
+aside {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    position: fixed;
+    top: 50px; /* Fixa o sidebar logo abaixo do header */
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    z-index: 5;
+}
+
+/* Estilos para o sidebar colapsado */
+aside.sidebar-collapsed {
+    width: 75px;
+}
+
+/* Estilos para o conteúdo da lista do sidebar */
+aside ul {
+    list-style: none;
+    padding: 20px 10px;
+    margin: 0;
+}
+
+/* Estilos para cada item da lista no sidebar */
+aside li {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para os links no sidebar */
+aside .menu-link {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+/* Estilos para as imagens dentro dos links no sidebar */
+aside .menu-link img {
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+}
+
+/* Estilo para o hover nos links do sidebar */
+aside .menu-link:hover {
+    color: #3498db;
+}
+
+/* Estilos para o estado colapsado do sidebar */
+aside.sidebar-collapsed .menu-link span {
+    display: none;
+}
+
+/* Ajusta o layout das imagens quando o sidebar está colapsado */
+aside.sidebar-collapsed .menu-link img {
+    margin-right: 0;
+}
+
+/* Estilos gerais do Header Horizontal */
+.header-horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3498db; /* Cor de fundo do cabeçalho */
+    color: white; /* Cor do texto */
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;  /* Assegure que esteja acima de outros elementos */
+    box-sizing: border-box; /* Inclui o padding no tamanho do box */
+}
+
+/* Efeito de hover para o botão do menu */
+.menu-toggle:hover {
+    background-color: white;
+    color: #3498db;
+}
+
+/* Estilos para o botão de alternância do menu (☰) */
+.menu-toggle {
+    background: none;
+    border: 2px solid white;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    padding: 7px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilos para o título do site */
+.site-title {
+    margin: 0;
+    font-size: 24px; /* Ajusta o tamanho da fonte do título */
+}
+
+/* Estilos para o menu de navegação horizontal */
+.horizontal-nav ul {
+    list-style: none;
+    display: flex; /* Organiza os itens na horizontal */
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para cada item de navegação no menu */
+.horizontal-nav li {
+    margin: 0 15px; /* Espaço entre os itens */
+}
+
+/* Estilos para os links dentro do menu */
+.horizontal-nav a {
+    color: white;
+    text-decoration: none; /* Remove o sublinhado */
+    font-size: 16px; /* Tamanho da fonte dos links */
+}
+
+/* Efeito de hover para os links de navegação */
+.horizontal-nav a:hover {
+    text-decoration: underline; /* Adiciona o sublinhado ao passar o mouse */
+}
