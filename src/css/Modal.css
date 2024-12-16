@@ -27,6 +27,8 @@
   overflow-y: auto;
   max-height: 90%; /* Garantir responsividade em telas menores */
   transition: transform 0.3s ease, opacity 0.3s ease; /* Animação ao abrir/fechar */
+  color: black;
+  text-align: center;
 }
 
 /*
@@ -84,6 +86,8 @@ Modal do formulario de edição
 /* Estilo dos campos de input e textarea */
 .modal input,
 .modal textarea {
+  background-color: #f0f0f0;
+  color: black;
   width: 100%;
   padding: 12px 10px; /* Menor espaçamento dentro dos campos */
   border: 1px solid #ccc;
@@ -131,6 +135,7 @@ Modal do formulario de edição
 
 /* Estilo do checkbox */
 .modal input[type="checkbox"] {
+  color-scheme: auto;
   accent-color: #3498db; /* Cor do checkbox */
   width: 22px; /* Aumenta o tamanho do checkbox */
   height: 22px; /* Aumenta o tamanho do checkbox */
@@ -210,7 +215,7 @@ Modal do formulario de edição
   right: 15px; /* Distância da direita */
   background: none; /* Sem fundo */
   border: none; /* Sem borda */
-  font-size: 28px; /* Tamanho do "X" */
+  font-size: 60px; /* Tamanho do "X" */
   font-weight: bold;
   color: #ccc; /* Cor do "X" */
   cursor: pointer; /* Cursor de ponteiro */
