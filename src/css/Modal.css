@@ -98,6 +98,24 @@ Modal do formulario de edição
   margin-bottom: 8px; /* Menor margem inferior entre os campos */
 }
 
+select {
+  background-color: #f0f0f0;
+  color: black;
+  width: 100%;
+  padding: 12px 10px; /* Menor espaçamento dentro dos campos */
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+  margin-left: auto;
+  margin-bottom: 8px; /* Menor margem inferior entre os campos */
+}
+select:focus {
+  border-color: #3498db; /* Azul no foco */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Brilho ao foco */
+  outline: none;
+}
+
 /* Estilo único para o campo de descrição */
 #fullDescription {
   width: 100%;
