@@ -226,7 +226,7 @@ export default {
     },
     fetchBrands() {
       // Substitua esta URL pela sua API real
-      fetch('https://controle-estoque-eu4h.onrender.com/brands')
+      fetch('https://controle-estoque-eu4h.onrender.com/brands?productType=1')
         .then(response => response.json())
         .then(data => {
           this.brands = data; // Preenche o array de marcas com a resposta da API
