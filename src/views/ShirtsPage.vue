@@ -29,7 +29,7 @@
         <tr v-for="(shirt, index) in shirts" :key="shirt.id" :class="{ 'highlight-row': index % 2 !== 0 }">
           <td>{{ shirt.id }}</td>
           <td>{{ shirt.description }}</td>
-          <td>{{ shirt.brand }}</td>
+          <td>{{ shirt.brand.name }}</td>
           <td>{{ shirt.price | currency }}</td>
           <td>{{ shirt.quantity }}</td>
           <td>{{ shirt.color }}</td>
@@ -71,7 +71,11 @@
           <textarea id="fullDescription" v-model="newShirt.fullDescription"></textarea>
 
           <label for="brand">Marca <span class="required">*</span></label>
-          <input type="text" id="brand" v-model="newShirt.brand" required />
+          <select id="brand" v-model="newShirt.brand" required>
+            <option v-for="brand in brands" :key="brand.id" :value="brand">
+              {{ brand.name }}
+            </option>
+          </select>
 
           <label for="price">Preço <span class="required">*</span></label>
           <input type="number" id="price" v-model="newShirt.price" required />
@@ -116,8 +120,16 @@
           <label for="fullDescription">Descrição Completa</label>
           <textarea id="fullDescription" v-model="editedShirt.fullDescription"></textarea>
 
-          <label for="brand">Marca</label>
-          <input type="text" id="brand" v-model="editedShirt.brand" required />
+          <!-- <label for="brand">Marca</label>
+          <input type="text" id="brand" v-model="editedShirt.brand" required /> -->
+
+          <label for="brand">Marca <span class="required">*</span></label>
+          <select id="brand" v-model="editedShirt.brand.id" required>
+            <option v-for="brand in brands" :key="brand.id" :value="brand.id">
+              {{ brand.name }}
+            </option>
+          </select>
+
 
           <label for="price">Preço</label>
           <input type="number" id="price" v-model="editedShirt.price" required />
@@ -182,7 +194,7 @@ export default {
       newShirt: {
         description: "",
         fullDescription: "",
-        brand: "",
+        brand: null,
         price: 0,
         quantity: 1,
         color: "",
@@ -190,12 +202,15 @@ export default {
         printed: false,
         material: "",
         urlImage: "",
+        brand: null,
       },
+      brands: [],
       shirtToDelete: null,
     };
   },
   created() {
     this.fetchShirts();
+    this.fetchBrands();
   },
   methods: {
     async fetchShirts() {
@@ -208,6 +223,17 @@ export default {
         console.error("Erro ao buscar camisas:", error);
       }
 
+    },
+    fetchBrands() {
+      // Substitua esta URL pela sua API real
+      fetch('https://controle-estoque-eu4h.onrender.com/brands')
+        .then(response => response.json())
+        .then(data => {
+          this.brands = data; // Preenche o array de marcas com a resposta da API
+        })
+        .catch(error => {
+          console.error('Erro ao carregar as marcas:', error);
+        });
     },
     editShirt(shirt) {
       this.editedShirt = { ...shirt };
