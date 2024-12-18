@@ -26,7 +26,7 @@
         <tr v-for="(shoe, index) in shoes" :key="shoe.id" :class="{ 'highlight-row': index % 2 !== 0 }">
           <td>{{ shoe.id }}</td>
           <td>{{ shoe.description }}</td>
-          <td>{{ shoe.brand }}</td>
+          <td>{{ shoe.brand.name }}</td>
           <td>{{ shoe.price | currency }}</td>
           <td>{{ shoe.quantity }}</td>
           <td>{{ shoe.color }}</td>
@@ -59,8 +59,12 @@
           <label for="description">Descrição</label>
           <input type="text" id="description" v-model="newShoe.description" required />
 
-          <label for="brand">Marca</label>
-          <input type="text" id="brand" v-model="newShoe.brand" required />
+          <label for="brand">Marca <span class="required">*</span></label>
+          <select id="brand" v-model="newShoe.brand" required>
+            <option v-for="brand in brands" :key="brand.id" :value="brand">
+              {{ brand.name }}
+            </option>
+          </select>
 
           <label for="price">Preço</label>
           <input type="number" id="price" v-model="newShoe.price" required />
@@ -95,10 +99,14 @@
           <input type="text" id="description" v-model="editedShoe.description" required />
 
           <label for="fullDescription">Descrição Completa</label>
-          <textarea id="fullDescription" v-model="editedShoe.fullDescription" ></textarea>
+          <textarea id="fullDescription" v-model="editedShoe.fullDescription"></textarea>
 
-          <label for="brand">Marca</label>
-          <input type="text" id="brand" v-model="editedShoe.brand" required />
+          <label for="brand">Marca <span class="required">*</span></label>
+          <select id="brand" v-model="editedShoe.brand.id" required>
+            <option v-for="brand in brands" :key="brand.id" :value="brand.id">
+              {{ brand.name }}
+            </option>
+          </select>
 
           <label for="price">Preço</label>
           <input type="number" id="price" v-model="editedShoe.price" required />
@@ -153,19 +161,21 @@ export default {
       isCreateModalVisible: false, // Modal para criação de sapato
       newShoe: {
         description: '',
-        brand: '',
+        brand: null,
         price: 0,
         quantity: 1,
         color: '',
         size: '',
         urlImage: ''
       },
+      brands: [],
       editedShoe: {},
       shoeToDelete: null,
     };
   },
   created() {
     this.fetchShoes();
+    this.fetchBrands();
   },
   methods: {
     async fetchShoes() {
@@ -175,6 +185,17 @@ export default {
       } catch (error) {
         console.error("Erro ao buscar sapatos:", error);
       }
+    },
+    fetchBrands() {
+      // Substitua esta URL pela sua API real
+      fetch('https://controle-estoque-eu4h.onrender.com/brands?productType=0')
+        .then(response => response.json())
+        .then(data => {
+          this.brands = data; // Preenche o array de marcas com a resposta da API
+        })
+        .catch(error => {
+          console.error('Erro ao carregar as marcas:', error);
+        });
     },
     editShoe(shoe) {
       this.editedShoe = { ...shoe };
@@ -200,7 +221,7 @@ export default {
       this.isCreateModalVisible = false;
       this.newShoe = {
         description: '',
-        brand: '',
+        brand: null,
         price: 0,
         quantity: 1,
         color: '',
