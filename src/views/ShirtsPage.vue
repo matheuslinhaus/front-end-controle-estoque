@@ -8,48 +8,50 @@
         Criar Nova Camisa
       </button>
     </div>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Descrição</th>
-          <th>Marca</th>
-          <th>Preço</th>
-          <th>Quantidade</th>
-          <th>Cor</th>
-          <th>Tamanho</th>
-          <th>Estampa</th>
-          <th>Material</th>
-          <th>Imagem</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(shirt, index) in shirts" :key="shirt.id" :class="{ 'highlight-row': index % 2 !== 0 }">
-          <td>{{ shirt.id }}</td>
-          <td>{{ shirt.description }}</td>
-          <td>{{ shirt.brand.name }}</td>
-          <td>{{ shirt.price | currency }}</td>
-          <td>{{ shirt.quantity }}</td>
-          <td>{{ shirt.color }}</td>
-          <td>{{ shirt.size }}</td>
-          <td>{{ shirt.printed ? "Sim" : "Não" }}</td>
-          <td>{{ shirt.material }}</td>
-          <td><img :src="shirt.urlImage" alt="Imagem da camisa" class="shirt-image" width="40" height="40" /></td>
-          <td class="actions">
-            <button @click="editShirt(shirt)" class="edit-btn" aria-label="Editar camisa">
-              <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Editar" />
-              Editar
-            </button>
-            <button @click="confirmDelete(shirt.id)" class="delete-btn" aria-label="Deletar camisa">
-              <img src="https://img.icons8.com/ios-filled/50/ffffff/delete.png" alt="Deletar" />
-              Deletar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="tabela-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Marca</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Cor</th>
+            <th>Tamanho</th>
+            <th>Estampa</th>
+            <th>Material</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(shirt, index) in shirts" :key="shirt.id" :class="{ 'highlight-row': index % 2 !== 0 }"
+            @click="navigateToProduct(shirt.id, 'shirts')" style="cursor: pointer">
+            <td>{{ shirt.id }}</td>
+            <td>{{ shirt.description }}</td>
+            <td>{{ shirt.brand.name }}</td>
+            <td>{{ shirt.price | currency }}</td>
+            <td>{{ shirt.quantity }}</td>
+            <td>{{ shirt.color }}</td>
+            <td>{{ shirt.size }}</td>
+            <td>{{ shirt.printed ? "Sim" : "Não" }}</td>
+            <td>{{ shirt.material }}</td>
+            <td><img :src="shirt.urlImage" alt="Imagem da camisa" class="shirt-image" width="40" height="40" /></td>
+            <td class="actions">
+              <button @click.stop="editShirt(shirt)" class="edit-btn" aria-label="Editar camisa">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Editar" />
+                Editar
+              </button>
+              <button @click.stop="confirmDelete(shirt.id)" class="delete-btn" aria-label="Deletar camisa">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/delete.png" alt="Deletar" />
+                Deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div>
       <LoadingModal ref="loadingModal" />
@@ -245,6 +247,9 @@ export default {
         .catch(error => {
           console.error('Erro ao carregar as marcas:', error);
         });
+    },
+    navigateToProduct(productId, productType) {
+      this.$router.push({ path: `/product/${productType}/${productId}` });
     },
     editShirt(shirt) {
       this.editedShirt = { ...shirt };

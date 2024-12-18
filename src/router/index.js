@@ -4,6 +4,9 @@ import Shirts from "../views/ShirtsPage.vue";
 import Shoes from "../views/ShoesPage.vue";
 import Vapes from "../views/VapesPage.vue";
 import Home from "../views/HomePage.vue";
+import ProductDetails from "../views/ProductPage.vue"; 
+import About from "../views/AboutPage.vue";
+
 
 const routes = [
   {
@@ -26,6 +29,14 @@ const routes = [
         path: "vapes", // Rota para a página de tenis
         component: Vapes,
       },
+      {
+        path: "product/:type/:id",
+        component: ProductDetails,
+      },
+      {
+        path: 'about',  // Definindo a rota para a página Sobre
+        component: About,
+      },   
     ],
   },
 ];
