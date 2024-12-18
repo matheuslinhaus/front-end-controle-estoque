@@ -1,3 +1,20 @@
+/* Contêiner da tabela para permitir rolagem e ocupar a largura da página */
+.tabela-container {
+  max-height: 500px; /* Altura máxima desejada para a tabela */
+  width: 100%; /* Faz com que a tabela ocupe toda a largura da página */
+  overflow-y: scroll; /* Exibe a barra de rolagem vertical quando necessário */
+  overflow-x: hidden;
+  border-radius: 10px; /* Bordas arredondadas */
+  border: 1px solid #ddd; /* Borda leve para o contêiner */
+  box-sizing: border-box; /* Garante que padding e border não alterem a largura total */
+}
+/* Cabeçalho Fixo */
+.table thead {
+  position: sticky;
+  top: 0;  /* Fixar o cabeçalho no topo */
+  z-index: 1;  /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
 .create-btn {
     float: right;
     padding: 12px 20px; /* Aumenta o tamanho para ser mais confortável */

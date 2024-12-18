@@ -1,3 +1,11 @@
+/* Remove a barra de rolagem para a página inteira */
+html, body {
+  height: 100%; /* Garante que a altura da página ocupe 100% da tela */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+}
+
 /* Estilo principal do layout */
 #layout {
     display: flex;

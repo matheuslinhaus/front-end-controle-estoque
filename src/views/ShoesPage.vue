@@ -7,44 +7,47 @@
       <img src="https://img.icons8.com/ios-filled/50/ffffff/plus.png" alt="Criar novo sapato" />
       Criar Novo Sapato
     </button>
+    <div class="tabela-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Marca</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Cor</th>
+            <th>Tamanho</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(shoe, index) in shoes" :key="shoe.id" :class="{ 'highlight-row': index % 2 !== 0 }"
+            @click="navigateToProduct(shoe.id, 'shoes')" style="cursor: pointer">
+            <td>{{ shoe.id }}</td>
+            <td>{{ shoe.description }}</td>
+            <td>{{ shoe.brand.name }}</td>
+            <td>{{ shoe.price | currency }}</td>
+            <td>{{ shoe.quantity }}</td>
+            <td>{{ shoe.color }}</td>
+            <td>{{ shoe.size }}</td>
+            <td><img :src="shoe.urlImage" alt="Imagem do sapato" class="shoe-image" width="40" height="40" /></td>
+            <td class="actions">
+              <button @click.stop="editShoe(shoe)" class="edit-btn" aria-label="Editar sapato">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Editar" />
+                Editar
+              </button>
+              <button @click.stop="confirmDelete(shoe.id)" class="delete-btn" aria-label="Deletar sapato">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/delete.png" alt="Deletar" />
+                Deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Descrição</th>
-          <th>Marca</th>
-          <th>Preço</th>
-          <th>Quantidade</th>
-          <th>Cor</th>
-          <th>Tamanho</th>
-          <th>Imagem</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(shoe, index) in shoes" :key="shoe.id" :class="{ 'highlight-row': index % 2 !== 0 }">
-          <td>{{ shoe.id }}</td>
-          <td>{{ shoe.description }}</td>
-          <td>{{ shoe.brand.name }}</td>
-          <td>{{ shoe.price | currency }}</td>
-          <td>{{ shoe.quantity }}</td>
-          <td>{{ shoe.color }}</td>
-          <td>{{ shoe.size }}</td>
-          <td><img :src="shoe.urlImage" alt="Imagem do sapato" class="shoe-image" width="40" height="40" /></td>
-          <td class="actions">
-            <button @click="editShoe(shoe)" class="edit-btn" aria-label="Editar sapato">
-              <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Editar" />
-              Editar
-            </button>
-            <button @click="confirmDelete(shoe.id)" class="delete-btn" aria-label="Deletar sapato">
-              <img src="https://img.icons8.com/ios-filled/50/ffffff/delete.png" alt="Deletar" />
-              Deletar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
 
     <div>
       <LoadingModal ref="loadingModal" />
@@ -211,6 +214,9 @@ export default {
         .catch(error => {
           console.error('Erro ao carregar as marcas:', error);
         });
+    },
+    navigateToProduct(productId, productType) {
+      this.$router.push({ path: `/product/${productType}/${productId}` });
     },
     editShoe(shoe) {
       this.editedShoe = { ...shoe };

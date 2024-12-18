@@ -7,47 +7,48 @@
       <img src="https://img.icons8.com/ios-filled/50/ffffff/plus.png" alt="Criar novo vape" />
       Criar Novo Vape
     </button>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Descrição</th>
-          <th>Marca</th>
-          <th>Preço</th>
-          <th>Quantidade</th>
-          <th>Puffs</th>
-          <th>Sabor</th>
-          <th>Imagem</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(vape, index) in vapes" :key="vape.id" :class="{ 'highlight-row': index % 2 !== 0 }">
-          <td>{{ vape.id }}</td>
-          <td>{{ vape.description }}</td>
-          <td>{{ vape.brand.name }}</td>
-          <td>{{ vape.price | currency }}</td>
-          <td>{{ vape.quantity }}</td>
-          <td>{{ vape.puffs }}</td>
-          <td>{{ vape.flavor }}</td>
-          <td>
-            <img :src="vape.urlImage" alt="Vape" width="40" height="40" />
-          </td>
-          <td class="actions">
-            <button @click="editVape(vape)" class="edit-btn" aria-label="Editar vape">
-              <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Editar" />
-              Editar
-            </button>
-            <button @click="confirmDelete(vape.id)" class="delete-btn" aria-label="Deletar vape">
-              <img src="https://img.icons8.com/ios-filled/50/ffffff/delete.png" alt="Deletar" />
-              Deletar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
+    <div class="tabela-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Marca</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Puffs</th>
+            <th>Sabor</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(vape, index) in vapes" :key="vape.id" :class="{ 'highlight-row': index % 2 !== 0 }"
+            @click="navigateToProduct(vape.id, 'vapes')" style="cursor: pointer">
+            <td>{{ vape.id }}</td>
+            <td>{{ vape.description }}</td>
+            <td>{{ vape.brand.name }}</td>
+            <td>{{ vape.price | currency }}</td>
+            <td>{{ vape.quantity }}</td>
+            <td>{{ vape.puffs }}</td>
+            <td>{{ vape.flavor }}</td>
+            <td>
+              <img :src="vape.urlImage" alt="Vape" width="40" height="40" />
+            </td>
+            <td class="actions">
+              <button @click.stop="editVape(vape)" class="edit-btn" aria-label="Editar vape">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Editar" />
+                Editar
+              </button>
+              <button @click.stop="confirmDelete(vape.id)" class="delete-btn" aria-label="Deletar vape">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/delete.png" alt="Deletar" />
+                Deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div>
       <LoadingModal ref="loadingModal" />
     </div>
@@ -62,7 +63,7 @@
           <input type="text" id="description" v-model="newVape.description" required />
 
           <label for="fullDescription">Descrição Completa</label>
-          <textarea id="fullDescription" v-model="newVape.fullDescription" ></textarea>
+          <textarea id="fullDescription" v-model="newVape.fullDescription"></textarea>
 
           <label for="brand">Marca <span class="required">*</span></label>
           <select id="brand" v-model="newVape.brand" required>
@@ -104,7 +105,7 @@
           <input type="text" id="description" v-model="editedVape.description" required />
 
           <label for="fullDescription">Descrição Completa</label>
-          <textarea id="fullDescription" v-model="editedVape.fullDescription" ></textarea>
+          <textarea id="fullDescription" v-model="editedVape.fullDescription"></textarea>
 
           <label for="brand">Marca <span class="required">*</span></label>
           <select id="brand" v-model="editedVape.brand.id" required>
@@ -201,6 +202,9 @@ export default {
         .catch(error => {
           console.error('Erro ao carregar as marcas:', error);
         });
+    },
+    navigateToProduct(productId, productType) {
+      this.$router.push({ path: `/product/${productType}/${productId}` });
     },
     openCreateModal() {
       this.isCreateModalVisible = true;
