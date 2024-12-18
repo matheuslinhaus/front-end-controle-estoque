@@ -58,8 +58,11 @@
         <button @click="closeCreateModal" class="close-btn" aria-label="Fechar modal">&times;</button>
         <h2>Criar Novo Vape</h2>
         <form @submit.prevent="submitCreate">
-          <label for="description">Descrição</label>
+          <label for="description">Descrição <span class="required">*</span></label>
           <input type="text" id="description" v-model="newVape.description" required />
+
+          <label for="fullDescription">Descrição Completa</label>
+          <textarea id="fullDescription" v-model="newVape.fullDescription" ></textarea>
 
           <label for="brand">Marca <span class="required">*</span></label>
           <select id="brand" v-model="newVape.brand" required>
@@ -68,16 +71,16 @@
             </option>
           </select>
 
-          <label for="price">Preço</label>
+          <label for="price">Preço <span class="required">*</span></label>
           <input type="number" id="price" v-model="newVape.price" required />
 
-          <label for="quantity">Quantidade</label>
+          <label for="quantity">Quantidade <span class="required">*</span></label>
           <input type="number" id="quantity" v-model="newVape.quantity" required />
 
-          <label for="puffs">Puffs</label>
+          <label for="puffs">Puffs <span class="required">*</span></label>
           <input type="number" id="puffs" v-model="newVape.puffs" required />
 
-          <label for="flavor">Sabor</label>
+          <label for="flavor">Sabor <span class="required">*</span></label>
           <input type="text" id="flavor" v-model="newVape.flavor" required />
 
           <label for="urlImage">Imagem URL</label>
@@ -97,7 +100,7 @@
         <button @click="closeModal" class="close-btn" aria-label="Fechar modal">&times;</button>
         <h2>Editar Vape</h2>
         <form @submit.prevent="submitEdit">
-          <label for="description">Descrição</label>
+          <label for="description">Descrição <span class="required">*</span></label>
           <input type="text" id="description" v-model="editedVape.description" required />
 
           <label for="fullDescription">Descrição Completa</label>

@@ -56,8 +56,11 @@
         <button @click="closeCreateModal" class="close-btn" aria-label="Fechar modal">&times;</button>
         <h2>Criar Novo Sapato</h2>
         <form @submit.prevent="submitCreate">
-          <label for="description">Descrição</label>
+          <label for="description">Descrição <span class="required">*</span></label>
           <input type="text" id="description" v-model="newShoe.description" required />
+
+          <label for="fullDescription">Descrição completa</label>
+          <input type="text" id="fullDescription" v-model="newShoe.fullDescription" />
 
           <label for="brand">Marca <span class="required">*</span></label>
           <select id="brand" v-model="newShoe.brand" required>
@@ -66,17 +69,22 @@
             </option>
           </select>
 
-          <label for="price">Preço</label>
+          <label for="price">Preço <span class="required">*</span></label>
           <input type="number" id="price" v-model="newShoe.price" required />
 
-          <label for="quantity">Quantidade</label>
+          <label for="quantity">Quantidade <span class="required">*</span></label>
           <input type="number" id="quantity" v-model="newShoe.quantity" required />
 
-          <label for="color">Cor</label>
+          <label for="color">Cor <span class="required">*</span></label>
           <input type="text" id="color" v-model="newShoe.color" required />
 
-          <label for="size">Tamanho</label>
-          <input type="text" id="size" v-model="newShoe.size" required />
+          <label for="size">Tamanho <span class="required">*</span></label>
+          <select id="size" v-model="newShoe.size" required>
+            <option disabled value="">Selecione um tamanho</option>
+            <option v-for="size in sizes" :key="size" :value="size">
+              {{ size }}
+            </option>
+          </select>
 
           <label for="urlImage">URL da Imagem</label>
           <input type="text" id="urlImage" v-model="newShoe.urlImage" />
@@ -95,7 +103,7 @@
         <button @click="closeModal" class="close-btn" aria-label="Fechar modal">&times;</button>
         <h2>Editar Sapato</h2>
         <form @submit.prevent="submitEdit">
-          <label for="description">Descrição</label>
+          <label for="description">Descrição <span class="required">*</span></label>
           <input type="text" id="description" v-model="editedShoe.description" required />
 
           <label for="fullDescription">Descrição Completa</label>
@@ -108,17 +116,22 @@
             </option>
           </select>
 
-          <label for="price">Preço</label>
+          <label for="price">Preço <span class="required">*</span></label>
           <input type="number" id="price" v-model="editedShoe.price" required />
 
-          <label for="quantity">Quantidade</label>
+          <label for="quantity">Quantidade <span class="required">*</span></label>
           <input type="number" id="quantity" v-model="editedShoe.quantity" required />
 
-          <label for="color">Cor</label>
+          <label for="color">Cor <span class="required">*</span></label>
           <input type="text" id="color" v-model="editedShoe.color" required />
 
-          <label for="size">Tamanho</label>
-          <input type="text" id="size" v-model="editedShoe.size" required />
+          <label for="size">Tamanho <span class="required">*</span></label>
+          <select id="size" v-model="editedShoe.size" required>
+            <option disabled value="">Selecione um tamanho</option>
+            <option v-for="size in sizes" :key="size" :value="size">
+              {{ size }}
+            </option>
+          </select>
 
           <label for="urlImage">URL da Imagem</label>
           <input type="text" id="urlImage" v-model="editedShoe.urlImage" />
@@ -159,8 +172,10 @@ export default {
       isModalVisible: false,
       isDeleteModalVisible: false,
       isCreateModalVisible: false, // Modal para criação de sapato
+      sizes: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
       newShoe: {
         description: '',
+        fullDescription: '',
         brand: null,
         price: 0,
         quantity: 1,
@@ -221,6 +236,7 @@ export default {
       this.isCreateModalVisible = false;
       this.newShoe = {
         description: '',
+        fullDescription: '',
         brand: null,
         price: 0,
         quantity: 1,

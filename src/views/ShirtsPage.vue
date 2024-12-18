@@ -87,7 +87,12 @@
           <input type="text" id="color" v-model="newShirt.color" required />
 
           <label for="size">Tamanho <span class="required">*</span></label>
-          <input type="text" id="size" v-model="newShirt.size" required />
+          <select id="size" v-model="newShirt.size" required>
+            <option disabled value="">Selecione um tamanho</option>
+            <option v-for="size in sizes" :key="size" :value="size">
+              {{ size }}
+            </option>
+          </select>
 
           <label for="printed" style="display: flex; align-items: center">
             <span style="margin-right: 10px">Estampa</span>
@@ -95,7 +100,7 @@
           </label>
 
           <label for="material">Material</label>
-          <input type="text" id="material" v-model="newShirt.material" required />
+          <input type="text" id="material" v-model="newShirt.material" />
 
           <label for="urlImage">Url da Imagem</label>
           <input type="text" id="urlImage" v-model="newShirt.urlImage" />
@@ -114,7 +119,7 @@
         <button @click="closeModal" class="close-btn" aria-label="Fechar modal">&times;</button>
         <h2>Editar Camisa</h2>
         <form @submit.prevent="submitEdit">
-          <label for="description">Descrição</label>
+          <label for="description">Descrição <span class="required">*</span></label>
           <input type="text" id="description" v-model="editedShirt.description" required />
 
           <label for="fullDescription">Descrição Completa</label>
@@ -131,17 +136,22 @@
           </select>
 
 
-          <label for="price">Preço</label>
+          <label for="price">Preço <span class="required">*</span></label>
           <input type="number" id="price" v-model="editedShirt.price" required />
 
-          <label for="quantity">Quantidade</label>
+          <label for="quantity">Quantidade <span class="required">*</span></label>
           <input type="number" id="quantity" v-model="editedShirt.quantity" required />
 
-          <label for="color">Cor</label>
+          <label for="color">Cor <span class="required">*</span></label>
           <input type="text" id="color" v-model="editedShirt.color" required />
 
-          <label for="size">Tamanho</label>
-          <input type="text" id="size" v-model="editedShirt.size" required />
+          <label for="size">Tamanho <span class="required">*</span></label>
+          <select id="size" v-model="editedShirt.size" required>
+            <option disabled value="">Selecione um tamanho</option>
+            <option v-for="size in sizes" :key="size" :value="size">
+              {{ size }}
+            </option>
+          </select>
 
           <label for="printed" style="display: flex; align-items: center">
             <span style="margin-right: 10px">Estampa</span>
@@ -149,7 +159,7 @@
           </label>
 
           <label for="material">Material</label>
-          <input type="text" id="material" v-model="editedShirt.material" required />
+          <input type="text" id="material" v-model="editedShirt.material" />
 
           <label for="urlImage">Url da Imagem</label>
           <input type="text" id="urlImage" v-model="editedShirt.urlImage" />
@@ -191,6 +201,7 @@ export default {
       isModalVisible: false,
       isDeleteModalVisible: false,
       editedShirt: {},
+      sizes: ["PP", "P", "M", "G", "GG", "XG"],
       newShirt: {
         description: "",
         fullDescription: "",
