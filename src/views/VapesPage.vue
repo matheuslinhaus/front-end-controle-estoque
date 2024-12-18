@@ -26,7 +26,7 @@
         <tr v-for="(vape, index) in vapes" :key="vape.id" :class="{ 'highlight-row': index % 2 !== 0 }">
           <td>{{ vape.id }}</td>
           <td>{{ vape.description }}</td>
-          <td>{{ vape.brand }}</td>
+          <td>{{ vape.brand.name }}</td>
           <td>{{ vape.price | currency }}</td>
           <td>{{ vape.quantity }}</td>
           <td>{{ vape.puffs }}</td>
@@ -61,8 +61,12 @@
           <label for="description">Descrição</label>
           <input type="text" id="description" v-model="newVape.description" required />
 
-          <label for="brand">Marca</label>
-          <input type="text" id="brand" v-model="newVape.brand" required />
+          <label for="brand">Marca <span class="required">*</span></label>
+          <select id="brand" v-model="newVape.brand" required>
+            <option v-for="brand in brands" :key="brand.id" :value="brand">
+              {{ brand.name }}
+            </option>
+          </select>
 
           <label for="price">Preço</label>
           <input type="number" id="price" v-model="newVape.price" required />
@@ -99,8 +103,12 @@
           <label for="fullDescription">Descrição Completa</label>
           <textarea id="fullDescription" v-model="editedVape.fullDescription" ></textarea>
 
-          <label for="brand">Marca</label>
-          <input type="text" id="brand" v-model="editedVape.brand" required />
+          <label for="brand">Marca <span class="required">*</span></label>
+          <select id="brand" v-model="editedVape.brand.id" required>
+            <option v-for="brand in brands" :key="brand.id" :value="brand.id">
+              {{ brand.name }}
+            </option>
+          </select>
 
           <label for="price">Preço</label>
           <input type="number" id="price" v-model="editedVape.price" required />
@@ -155,19 +163,21 @@ export default {
       isCreateModalVisible: false, // Modal de Criação
       newVape: {
         description: '',
-        brand: '',
+        brand: null,
         price: 0,
         quantity: 1,
         puffs: 0,
         flavor: '',
         urlImage: ''
       },
+      brands: [],
       editedVape: {},
       vapeToDelete: null, // Armazena o ID do vape a ser excluído
     };
   },
   created() {
     this.fetchVapes();
+    this.fetchBrands();
   },
   methods: {
     async fetchVapes() {
@@ -177,6 +187,17 @@ export default {
       } catch (error) {
         console.error("Erro ao buscar vapes:", error);
       }
+    },
+    fetchBrands() {
+      // Substitua esta URL pela sua API real
+      fetch('https://controle-estoque-eu4h.onrender.com/brands?productType=2')
+        .then(response => response.json())
+        .then(data => {
+          this.brands = data; // Preenche o array de marcas com a resposta da API
+        })
+        .catch(error => {
+          console.error('Erro ao carregar as marcas:', error);
+        });
     },
     openCreateModal() {
       this.isCreateModalVisible = true;
