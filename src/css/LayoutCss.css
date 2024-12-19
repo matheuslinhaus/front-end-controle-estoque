@@ -131,6 +131,7 @@ html, body {
   
   /* Conteúdo Principal */
   main {
+    background-color: #13202c;
     text-align: left;
     margin-top: 70px; /* Espaço para o menu horizontal */
     padding: 20px;
