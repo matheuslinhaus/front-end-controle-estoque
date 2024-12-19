@@ -25,6 +25,7 @@ export default {
         { path: "/shirts", name: "Camisas", icon: "https://img.icons8.com/ios-filled/50/ffffff/t-shirt.png" },
         { path: "/shoes", name: "Tênis", icon: "https://img.icons8.com/ios-filled/50/ffffff/sneakers.png" },
         { path: "/vapes", name: "Vapes", icon: "https://img.icons8.com/?size=100&id=1099&format=png&color=ffffff" },
+        { path: "/brands", name: "Marcas", icon: "https://img.icons8.com/?size=100&id=9rCm9FIFH5qA&format=png&color=ffffff" },
       ],
     };
   },
