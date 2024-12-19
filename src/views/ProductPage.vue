@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import api from '@/services/api';
 export default {
     data() {
         return {
@@ -48,12 +49,14 @@ export default {
     async created() {
         const { type, id } = this.$route.params; // Obtemos o tipo e ID da rota
         try {
-            const response = await fetch(`https://controle-estoque-eu4h.onrender.com/${type.toLowerCase()}/${id}`);
+            const endpoint = `/${type.toLowerCase()}/${id}`;
+            const response = await api.get(endpoint);
             if (response.ok) {
                 this.produto = await response.json();
             } else {
                 console.error("Erro ao buscar o produto:", response.status, response.statusText);
             }
+            this.produto = response.data;
         } catch (error) {
             console.error("Erro na requisição:", error);
         }

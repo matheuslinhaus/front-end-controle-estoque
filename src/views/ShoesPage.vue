@@ -162,13 +162,13 @@
 </template>
 
 <script>
-import axios from 'axios';
-import "../css/Table.css"
-import "../css/Modal.css"
+import api from '@/services/api';
+import "../css/Table.css";
+import "../css/Modal.css";
 import LoadingModal from '../components/LoadingModal.vue';
 
 export default {
-  components: { LoadingModal, },
+  components: { LoadingModal },
   data() {
     return {
       shoes: [],
@@ -198,22 +198,19 @@ export default {
   methods: {
     async fetchShoes() {
       try {
-        const response = await axios.get('https://controle-estoque-eu4h.onrender.com/shoes');
+        const response = await api.get('/shoes');
         this.shoes = response.data;
       } catch (error) {
         console.error("Erro ao buscar sapatos:", error);
       }
     },
-    fetchBrands() {
-      // Substitua esta URL pela sua API real
-      fetch('https://controle-estoque-eu4h.onrender.com/brands?productType=0')
-        .then(response => response.json())
-        .then(data => {
-          this.brands = data; // Preenche o array de marcas com a resposta da API
-        })
-        .catch(error => {
-          console.error('Erro ao carregar as marcas:', error);
-        });
+    async fetchBrands() {
+      try {
+        const response = await api.get('/brands', { params: { productType: 0 } });
+        this.brands = response.data;
+      } catch (error) {
+        console.error('Erro ao carregar as marcas:', error);
+      }
     },
     navigateToProduct(productId, productType) {
       this.$router.push({ path: `/product/${productType}/${productId}` });
@@ -229,7 +226,7 @@ export default {
     async submitCreate() {
       this.$refs.loadingModal.show(); // Exibe o modal de carregamento
       try {
-        const response = await axios.post('https://controle-estoque-eu4h.onrender.com/shoes', this.newShoe);
+        const response = await api.post('/shoes', this.newShoe);
         this.shoes.push(response.data);
         this.closeCreateModal();
       } catch (error) {
@@ -254,7 +251,7 @@ export default {
     async submitEdit() {
       this.$refs.loadingModal.show(); // Exibe o modal de carregamento
       try {
-        const response = await axios.put(`https://controle-estoque-eu4h.onrender.com/shoes/${this.editedShoe.id}`, this.editedShoe);
+        const response = await api.put(`/shoes/${this.editedShoe.id}`, this.editedShoe);
         const index = this.shoes.findIndex(s => s.id === this.editedShoe.id);
         if (index !== -1) {
           this.shoes.splice(index, 1, response.data);
@@ -277,7 +274,7 @@ export default {
     async deleteShoe() {
       this.$refs.loadingModal.hide(); // Esconde o modal de carregamento
       try {
-        await axios.delete(`https://controle-estoque-eu4h.onrender.com/shoes/${this.shoeToDelete}`);
+        await api.delete(`/shoes/${this.shoeToDelete}`);
         this.shoes = this.shoes.filter(shoe => shoe.id !== this.shoeToDelete);
         this.closeDeleteModal();
       } catch (error) {

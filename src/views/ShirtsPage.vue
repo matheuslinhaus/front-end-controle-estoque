@@ -192,7 +192,7 @@
 import "../css/Modal.css";
 import "../css/Table.css";
 import LoadingModal from "../components/LoadingModal.vue";
-import axios from "axios";
+import api from '@/services/api';
 
 export default {
   components: { LoadingModal, },
@@ -215,7 +215,6 @@ export default {
         printed: false,
         material: "",
         urlImage: "",
-        brand: null,
       },
       brands: [],
       shirtToDelete: null,
@@ -228,25 +227,19 @@ export default {
   methods: {
     async fetchShirts() {
       try {
-        const response = await axios.get(
-          "https://controle-estoque-eu4h.onrender.com/shirts"
-        );
+        const response = await api.get('/shirts');
         this.shirts = response.data;
       } catch (error) {
         console.error("Erro ao buscar camisas:", error);
       }
-
     },
-    fetchBrands() {
-      // Substitua esta URL pela sua API real
-      fetch('https://controle-estoque-eu4h.onrender.com/brands?productType=1')
-        .then(response => response.json())
-        .then(data => {
-          this.brands = data; // Preenche o array de marcas com a resposta da API
-        })
-        .catch(error => {
-          console.error('Erro ao carregar as marcas:', error);
-        });
+    async fetchBrands() {
+      try {
+        const response = await api.get('/brands', { params: { productType: 1 } });
+        this.brands = response.data;
+      } catch (error) {
+        console.error('Erro ao carregar as marcas:', error);
+      }
     },
     navigateToProduct(productId, productType) {
       this.$router.push({ path: `/product/${productType}/${productId}` });
@@ -257,12 +250,8 @@ export default {
     },
     async submitEdit() {
       this.$refs.loadingModal.show(); // Exibe o modal de carregamento
-      //this.isLoading = true; // Exibe o modal de carregamento
       try {
-        const response = await axios.put(
-          `https://controle-estoque-eu4h.onrender.com/shirts/${this.editedShirt.id}`,
-          this.editedShirt
-        );
+        const response = await api.put(`/shirts/${this.editedShirt.id}`, this.editedShirt);
         const index = this.shirts.findIndex((s) => s.id === this.editedShirt.id);
         if (index !== -1) {
           this.shirts.splice(index, 1, response.data);
@@ -272,7 +261,6 @@ export default {
         console.error("Erro ao editar camisa:", error);
       } finally {
         this.$refs.loadingModal.hide(); // Esconde o modal de carregamento
-        //this.isLoading = false; // Oculta o modal de carregamento
       }
     },
     closeModal() {
@@ -283,14 +271,9 @@ export default {
       this.isCreateModalVisible = true;
     },
     async submitCreate() {
-      //this.isLoading = true; // Exibe o modal de carregamento
       this.$refs.loadingModal.show(); // Exibe o modal de carregamento
       try {
-        const response = await axios.post(
-          "https://controle-estoque-eu4h.onrender.com/shirts",
-          this.newShirt
-        );
-        console.log(response); // Verifique a resposta da API
+        const response = await api.post('/shirts', this.newShirt);
         this.shirts.push(response.data);
         this.closeCreateModal();
       } catch (error) {
@@ -320,11 +303,8 @@ export default {
     },
     async deleteShirt() {
       this.$refs.loadingModal.show(); // Exibe o modal de carregamento
-      //this.isLoading = true; // Exibe o modal de carregamento
       try {
-        await axios.delete(
-          `https://controle-estoque-eu4h.onrender.com/shirts/${this.shirtToDelete}`
-        );
+        await api.delete(`/shirts/${this.shirtToDelete}`);
         this.shirts = this.shirts.filter(
           (shirt) => shirt.id !== this.shirtToDelete
         );
@@ -333,7 +313,6 @@ export default {
         console.error("Erro ao deletar camisa:", error);
       } finally {
         this.$refs.loadingModal.hide(); // Esconde o modal de carregamento
-        //this.isLoading = false; // Oculta o modal de carregamento
       }
     },
     closeDeleteModal() {
