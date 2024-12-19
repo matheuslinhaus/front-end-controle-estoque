@@ -6,6 +6,7 @@ import Vapes from "../views/VapesPage.vue";
 import Home from "../views/HomePage.vue";
 import ProductDetails from "../views/ProductPage.vue"; 
 import About from "../views/AboutPage.vue";
+import Brands from "../views/BrandsPage.vue";
 
 
 const routes = [
@@ -28,6 +29,10 @@ const routes = [
       {
         path: "vapes", // Rota para a página de tenis
         component: Vapes,
+      },
+      {
+        path: 'brands',
+        component: Brands,
       },
       {
         path: "product/:type/:id",
